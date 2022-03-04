@@ -6,17 +6,25 @@ import matter from "gray-matter";
 
 import { Button } from "../../components/Button";
 import { StaticCodeSnippet } from "../../components/StaticCodeSnippet";
-import { Article } from "../../components/Article";
+import { Article } from "../../components/Layout";
 import { Paragraph } from "../../components/Paragraph";
+import { Title } from "../../components/Title";
 
-const components = { Button, StaticCodeSnippet, p: props => <Paragraph {...props} /> };
+const components = {
+  Button,
+  StaticCodeSnippet,
+  p: props => <Paragraph {...props} />,
+};
 
 const PostPage = ({ frontMatter: { title, date, layout }, mdxSource }) => {
   switch (layout) {
     case "Article":
       return (
         <Article>
-          <h1>{title}</h1>
+          <time className="font-medium text-sm tracking-wide">
+            {date}
+          </time>
+          <Title>{title}</Title>
           <MDXRemote {...mdxSource} components={components} />
         </Article>
       );
